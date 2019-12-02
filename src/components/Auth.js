@@ -43,15 +43,15 @@ class Auth extends Component {
         return;
       }
 
-      this.setSession(authResult.idTokenPayload);
+      this.setSession(authResult);
     });
   };
 
   setSession(data) {
     const user = {
-      id: data.sub,
-      email: data.email,
-      role: data[AUTH_CONFIG.roleUrl]
+      id: data.idTokenPayload.sub,
+      email: data.idTokenPayload.email,
+      role: data.idTokenPayload[AUTH_CONFIG.roleUrl]
     };
     this.setState({
       authenticated: true,
